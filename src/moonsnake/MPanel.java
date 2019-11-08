@@ -9,7 +9,9 @@ import java.awt.*;
  * @Time 12:02
  */
 public class MPanel extends JPanel {
-    ImageIcon title = new ImageIcon("title.jpg");
+    String path = "src/resource/";
+
+    ImageIcon title = new ImageIcon(path + "title.jpg");
 
 
 
@@ -22,5 +24,6 @@ public class MPanel extends JPanel {
         this.setBackground(Color.WHITE);
         title.paintIcon(this, g, 25, 11);
 
+        g.fillRect(25, 75, 850, 600);
     }
 }
