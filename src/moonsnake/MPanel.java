@@ -2,13 +2,15 @@ package moonsnake;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * @author LuoJiaQi
  * @Date 2019/11/8
  * @Time 12:02
  */
-public class MPanel extends JPanel {
+public class MPanel extends JPanel implements KeyListener {
     String path = "src/resource/";
 
     ImageIcon title = new ImageIcon(path + "title.jpg");
@@ -25,10 +27,14 @@ public class MPanel extends JPanel {
     int[] snakey = new int[750];
     String fx = "L";
 
+    boolean isStart = false;//开始与否状态
+
 
 
     public MPanel() {
         initSnake();//初始化蛇的位置和长度
+        this.setFocusable(true);
+        this.addKeyListener(this);
     }
 
     public void paintComponent(Graphics g) {
@@ -50,10 +56,11 @@ public class MPanel extends JPanel {
         }
 
         //设置开始提示
-        g.setColor(Color.WHITE);//设置画笔颜色
-        g.setFont(new Font("arial", Font.BOLD, 40));//设置字体
-        g.drawString("Press Space to Start", 250, 300);
-
+        if (!isStart) {
+            g.setColor(Color.WHITE);//设置画笔颜色
+            g.setFont(new Font("arial", Font.BOLD, 40));//设置字体
+            g.drawString("Press Space to Start", 250, 300);
+        }
         for (int i = 0; i < len; i++) {
             body.paintIcon(this, g, snakex[i], snakey[i]);
         }
@@ -67,5 +74,24 @@ public class MPanel extends JPanel {
         snakey[1] = 100;
         snakex[2] = 50;
         snakey[2] = 100;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode();//获取哪个键被按下
+        if (keyCode == KeyEvent.VK_SPACE) {
+            isStart = !isStart;
+            repaint();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }
