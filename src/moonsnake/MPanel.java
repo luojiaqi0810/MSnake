@@ -2,6 +2,8 @@ package moonsnake;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -10,7 +12,7 @@ import java.awt.event.KeyListener;
  * @Date 2019/11/8
  * @Time 12:02
  */
-public class MPanel extends JPanel implements KeyListener {
+public class MPanel extends JPanel implements KeyListener, ActionListener {
     String path = "src/resource/";
 
     ImageIcon title = new ImageIcon(path + "title.jpg");
@@ -28,13 +30,15 @@ public class MPanel extends JPanel implements KeyListener {
     String fx = "L";
 
     boolean isStart = false;//开始与否状态
+    Timer timer = new Timer(100, this);
 
 
 
     public MPanel() {
         initSnake();//初始化蛇的位置和长度
-        this.setFocusable(true);
-        this.addKeyListener(this);
+        this.setFocusable(true);//可以获取焦点
+        this.addKeyListener(this);//键盘监听
+        timer.start();
     }
 
     public void paintComponent(Graphics g) {
@@ -93,5 +97,21 @@ public class MPanel extends JPanel implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        for (int i = len - 1; i > 0; i--) {
+            snakex[i] = snakex[i - 1];
+            snakey[i] = snakey[i - 1];
+        }
+        snakex[0] = snakex[0] + 25;
+        if (snakex[0] > 850) {
+            snakex[0] = 25;
+        }
+
+
+        repaint();
+        timer.start();
     }
 }
