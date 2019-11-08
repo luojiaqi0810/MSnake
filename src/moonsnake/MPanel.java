@@ -29,6 +29,7 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
     int[] snakex = new int[750];
     int[] snakey = new int[750];
     String fx = "R";
+    String nextDirection = fx;
 
     boolean isStart = false;//开始与否状态
     boolean isFailed = false;//是否失败
@@ -53,6 +54,7 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
 
         g.fillRect(25, 75, 850, 600);
 
+        //设置长度和分数提示
         g.setColor(Color.WHITE);
         g.setFont(new Font("arial", Font.BOLD, 15));//设置字体
         g.drawString("Len: " + len, 750, 35);
@@ -84,6 +86,7 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
             g.setColor(Color.WHITE);//设置画笔颜色
             g.setFont(new Font("arial", Font.BOLD, 40));//设置字体
             g.drawString("Failed: Press Space to Restart", 200, 300);
+            g.drawString("Your Score is: " + score,200,400);
         }
 
         //画蛇身
@@ -103,6 +106,7 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
         foodx = 25 + 25 * rand.nextInt(34);
         foody = 75 + 25 * rand.nextInt(24);
         fx = "R";
+        nextDirection = fx;
         score = 0;
     }
 
@@ -124,13 +128,13 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
 
             repaint();
         } else if (keyCode == KeyEvent.VK_LEFT) {
-            fx = "L";
+            nextDirection = "L";
         } else if (keyCode == KeyEvent.VK_RIGHT) {
-            fx = "R";
+            nextDirection = "R";
         } else if (keyCode == KeyEvent.VK_UP) {
-            fx = "U";
+            nextDirection = "U";
         } else if (keyCode == KeyEvent.VK_DOWN) {
-            fx = "D";
+            nextDirection = "D";
         }
     }
 
@@ -146,25 +150,58 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
                 snakex[i] = snakex[i - 1];
                 snakey[i] = snakey[i - 1];
             }
-            if (fx == "R") {
-                snakex[0] = snakex[0] + 25;
-                if (snakex[0] > 850) {
-                    snakex[0] = 25;
+            if (nextDirection == "R") {
+                if (fx != "L") {
+                    snakex[0] = snakex[0] + 25;
+                    if (snakex[0] > 850) {
+                        snakex[0] = 25;
+                    }
+                    fx = nextDirection;
+                } else {
+                    snakex[0] = snakex[0] - 25;
+                    if (snakex[0] < 25) {
+                        snakex[0] = 850;
+                    }
                 }
-            } else if (fx == "L") {
-                snakex[0] = snakex[0] - 25;
-                if (snakex[0] < 25) {
-                    snakex[0] = 850;
+            } else if (nextDirection == "L") {
+                if (fx != "R") {
+                    snakex[0] = snakex[0] - 25;
+                    if (snakex[0] < 25) {
+                        snakex[0] = 850;
+                    }
+                    fx = nextDirection;
+                } else {
+                    snakex[0] = snakex[0] + 25;
+                    if (snakex[0] > 850) {
+                        snakex[0] = 25;
+                    }
+                    fx = nextDirection;
                 }
-            } else if (fx == "U") {
-                snakey[0] = snakey[0] - 25;
-                if (snakey[0] < 75) {
-                    snakey[0] = 650;
+            } else if (nextDirection == "U") {
+                if (fx != "D") {
+                    snakey[0] = snakey[0] - 25;
+                    if (snakey[0] < 75) {
+                        snakey[0] = 650;
+                    }
+                    fx = nextDirection;
+                } else {
+                    snakey[0] = snakey[0] + 25;
+                    if (snakey[0] > 650) {
+                        snakey[0] = 75;
+                    }
                 }
-            } else if (fx == "D") {
-                snakey[0] = snakey[0] + 25;
-                if (snakey[0] > 650) {
-                    snakey[0] = 75;
+            } else if (nextDirection == "D") {
+                if (fx != "U") {
+                    snakey[0] = snakey[0] + 25;
+                    if (snakey[0] > 650) {
+                        snakey[0] = 75;
+                    }
+                    fx = nextDirection;
+                } else {
+                    snakey[0] = snakey[0] - 25;
+                    if (snakey[0] < 75) {
+                        snakey[0] = 650;
+                    }
                 }
             }
 
