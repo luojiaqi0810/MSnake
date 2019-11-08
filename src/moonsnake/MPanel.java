@@ -154,26 +154,26 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
                 if (fx != "L") {
                     snakex[0] = snakex[0] + 25;
                     if (snakex[0] > 850) {
-                        snakex[0] = 25;
+                        isFailed = true;
                     }
                     fx = nextDirection;
                 } else {
                     snakex[0] = snakex[0] - 25;
                     if (snakex[0] < 25) {
-                        snakex[0] = 850;
+                        isFailed = true;
                     }
                 }
             } else if (nextDirection == "L") {
                 if (fx != "R") {
                     snakex[0] = snakex[0] - 25;
                     if (snakex[0] < 25) {
-                        snakex[0] = 850;
+                        isFailed = true;
                     }
                     fx = nextDirection;
                 } else {
                     snakex[0] = snakex[0] + 25;
                     if (snakex[0] > 850) {
-                        snakex[0] = 25;
+                        isFailed = true;
                     }
                     fx = nextDirection;
                 }
@@ -181,26 +181,26 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
                 if (fx != "D") {
                     snakey[0] = snakey[0] - 25;
                     if (snakey[0] < 75) {
-                        snakey[0] = 650;
+                        isFailed = true;
                     }
                     fx = nextDirection;
                 } else {
                     snakey[0] = snakey[0] + 25;
                     if (snakey[0] > 650) {
-                        snakey[0] = 75;
+                        isFailed = true;
                     }
                 }
             } else if (nextDirection == "D") {
                 if (fx != "U") {
                     snakey[0] = snakey[0] + 25;
                     if (snakey[0] > 650) {
-                        snakey[0] = 75;
+                        isFailed = true;
                     }
                     fx = nextDirection;
                 } else {
                     snakey[0] = snakey[0] - 25;
                     if (snakey[0] < 75) {
-                        snakey[0] = 650;
+                        isFailed = true;
                     }
                 }
             }
