@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 /**
  * @author LuoJiaQi
@@ -31,7 +32,9 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
 
     boolean isStart = false;//开始与否状态
     Timer timer = new Timer(100, this);
-
+    int foodx;
+    int foody;
+    Random rand = new Random();
 
 
     public MPanel() {
@@ -59,12 +62,16 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
             down.paintIcon(this, g, snakex[0], snakey[0]);
         }
 
+        //画食物
+        food.paintIcon(this, g, foodx, foody);
+
         //设置开始提示
         if (!isStart) {
             g.setColor(Color.WHITE);//设置画笔颜色
             g.setFont(new Font("arial", Font.BOLD, 40));//设置字体
             g.drawString("Press Space to Start", 250, 300);
         }
+        //画蛇身
         for (int i = 0; i < len; i++) {
             body.paintIcon(this, g, snakex[i], snakey[i]);
         }
@@ -78,6 +85,8 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
         snakey[1] = 100;
         snakex[2] = 50;
         snakey[2] = 100;
+        foodx = 25 + 25 * rand.nextInt(34);
+        foody = 75 + 25 * rand.nextInt(24);
     }
 
     @Override
