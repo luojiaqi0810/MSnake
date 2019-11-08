@@ -28,7 +28,7 @@ public class MPanel extends JPanel {
 
 
     public MPanel() {
-        initSnake();
+        initSnake();//初始化蛇的位置和长度
     }
 
     public void paintComponent(Graphics g) {
@@ -38,6 +38,7 @@ public class MPanel extends JPanel {
 
         g.fillRect(25, 75, 850, 600);
 
+        //画蛇头
         if (fx == "R") {
             right.paintIcon(this, g, snakex[0], snakey[0]);
         } else if (fx == "L") {
@@ -48,6 +49,10 @@ public class MPanel extends JPanel {
             down.paintIcon(this, g, snakex[0], snakey[0]);
         }
 
+        //设置开始提示
+        g.setColor(Color.WHITE);//设置画笔颜色
+        g.setFont(new Font("arial", Font.BOLD, 40));//设置字体
+        g.drawString("Press Space to Start", 250, 300);
 
         for (int i = 0; i < len; i++) {
             body.paintIcon(this, g, snakex[i], snakey[i]);
