@@ -73,6 +73,14 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
             g.setFont(new Font("arial", Font.BOLD, 40));//设置字体
             g.drawString("Press Space to Start", 250, 300);
         }
+
+        //设置结束提示
+        if (isFailed) {
+            g.setColor(Color.WHITE);//设置画笔颜色
+            g.setFont(new Font("arial", Font.BOLD, 40));//设置字体
+            g.drawString("Failed: Press Space to Restart", 200, 300);
+        }
+
         //画蛇身
         for (int i = 0; i < len; i++) {
             body.paintIcon(this, g, snakex[i], snakey[i]);
@@ -89,6 +97,7 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
         snakey[2] = 100;
         foodx = 25 + 25 * rand.nextInt(34);
         foody = 75 + 25 * rand.nextInt(24);
+        fx = "R";
     }
 
     @Override
@@ -100,7 +109,13 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();//获取哪个键被按下
         if (keyCode == KeyEvent.VK_SPACE) {
-            isStart = !isStart;
+            if (isFailed) {
+                initSnake();
+                isFailed = false;
+            } else {
+                isStart = !isStart;
+            }
+
             repaint();
         } else if (keyCode == KeyEvent.VK_LEFT) {
             fx = "L";
