@@ -23,6 +23,7 @@ public class MPanel extends JPanel {
     int len = 3;
     int[] snakex = new int[750];
     int[] snakey = new int[750];
+    String fx = "L";
 
 
 
@@ -37,7 +38,17 @@ public class MPanel extends JPanel {
 
         g.fillRect(25, 75, 850, 600);
 
-        right.paintIcon(this, g, snakex[0], snakey[0]);
+        if (fx == "R") {
+            right.paintIcon(this, g, snakex[0], snakey[0]);
+        } else if (fx == "L") {
+            left.paintIcon(this, g, snakex[0], snakey[0]);
+        } else if (fx == "U") {
+            up.paintIcon(this, g, snakex[0], snakey[0]);
+        } else if (fx == "D"){
+            down.paintIcon(this, g, snakex[0], snakey[0]);
+        }
+
+
         for (int i = 0; i < len; i++) {
             body.paintIcon(this, g, snakex[i], snakey[i]);
         }
