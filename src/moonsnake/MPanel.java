@@ -9,12 +9,18 @@ import java.awt.*;
  * @Time 12:02
  */
 public class MPanel extends JPanel {
+    ImageIcon title = new ImageIcon("title.jpg");
+
+
+
     public MPanel() {
 
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        this.setBackground(Color.GREEN);
+        this.setBackground(Color.WHITE);
+        title.paintIcon(this, g, 25, 11);
+
     }
 }
