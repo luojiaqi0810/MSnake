@@ -27,7 +27,7 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
     int len = 3;
     int[] snakex = new int[750];
     int[] snakey = new int[750];
-    String fx = "L";
+    String fx = "R";
 
     boolean isStart = false;//开始与否状态
     Timer timer = new Timer(100, this);
@@ -91,6 +91,14 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
         if (keyCode == KeyEvent.VK_SPACE) {
             isStart = !isStart;
             repaint();
+        } else if (keyCode == KeyEvent.VK_LEFT) {
+            fx = "L";
+        } else if (keyCode == KeyEvent.VK_RIGHT) {
+            fx = "R";
+        } else if (keyCode == KeyEvent.VK_UP) {
+            fx = "U";
+        } else if (keyCode == KeyEvent.VK_DOWN) {
+            fx = "D";
         }
     }
 
@@ -106,10 +114,29 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
                 snakex[i] = snakex[i - 1];
                 snakey[i] = snakey[i - 1];
             }
-            snakex[0] = snakex[0] + 25;
-            if (snakex[0] > 850) {
-                snakex[0] = 25;
+            if (fx == "R") {
+                snakex[0] = snakex[0] + 25;
+                if (snakex[0] > 850) {
+                    snakex[0] = 25;
+                }
+            } else if (fx == "L") {
+                snakex[0] = snakex[0] - 25;
+                if (snakex[0] < 25) {
+                    snakex[0] = 850;
+                }
+            } else if (fx == "U") {
+                snakey[0] = snakey[0] - 25;
+                if (snakey[0] < 75) {
+                    snakey[0] = 650;
+                }
+            } else if (fx == "D") {
+                snakey[0] = snakey[0] + 25;
+                if (snakey[0] > 650) {
+                    snakey[0] = 75;
+                }
             }
+
+
 
             repaint();
         }
