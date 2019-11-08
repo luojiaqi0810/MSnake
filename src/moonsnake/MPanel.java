@@ -20,9 +20,14 @@ public class MPanel extends JPanel {
     ImageIcon food = new ImageIcon(path + "food.png");
 
 
+    int len = 3;
+    int[] snakex = new int[750];
+    int[] snakey = new int[750];
+
+
 
     public MPanel() {
-
+        initSnake();
     }
 
     public void paintComponent(Graphics g) {
@@ -32,8 +37,19 @@ public class MPanel extends JPanel {
 
         g.fillRect(25, 75, 850, 600);
 
-        right.paintIcon(this, g, 100, 100);
-        body.paintIcon(this, g, 75, 100);
-        body.paintIcon(this, g, 50, 100);
+        right.paintIcon(this, g, snakex[0], snakey[0]);
+        for (int i = 0; i < len; i++) {
+            body.paintIcon(this, g, snakex[i], snakey[i]);
+        }
+    }
+
+    public void initSnake() {
+        len = 3;
+        snakex[0] = 100;
+        snakey[0] = 100;
+        snakex[1] = 75;
+        snakey[1] = 100;
+        snakex[2] = 50;
+        snakey[2] = 100;
     }
 }
