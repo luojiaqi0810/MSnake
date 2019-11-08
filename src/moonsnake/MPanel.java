@@ -145,6 +145,11 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
                 }
             }
 
+            if (snakex[0] == foodx && snakey[0] == foody) {
+                len++;
+                foodx = 25 + 25 * rand.nextInt(34);
+                foody = 75 + 25 * rand.nextInt(24);
+            }
 
 
             repaint();
