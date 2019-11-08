@@ -101,17 +101,18 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (int i = len - 1; i > 0; i--) {
-            snakex[i] = snakex[i - 1];
-            snakey[i] = snakey[i - 1];
-        }
-        snakex[0] = snakex[0] + 25;
-        if (snakex[0] > 850) {
-            snakex[0] = 25;
-        }
+        if (isStart) {
+            for (int i = len - 1; i > 0; i--) {
+                snakex[i] = snakex[i - 1];
+                snakey[i] = snakey[i - 1];
+            }
+            snakex[0] = snakex[0] + 25;
+            if (snakex[0] > 850) {
+                snakex[0] = 25;
+            }
 
-
-        repaint();
+            repaint();
+        }
         timer.start();
     }
 }
