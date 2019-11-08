@@ -24,8 +24,8 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
     ImageIcon right = new ImageIcon(path + "right.png");
     ImageIcon food = new ImageIcon(path + "food.png");
 
-
     int len = 3;
+    int score = 0;
     int[] snakex = new int[750];
     int[] snakey = new int[750];
     String fx = "R";
@@ -52,6 +52,11 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
         title.paintIcon(this, g, 25, 11);
 
         g.fillRect(25, 75, 850, 600);
+
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("arial", Font.BOLD, 15));//设置字体
+        g.drawString("Len: " + len, 750, 35);
+        g.drawString("Score: " + score, 750, 50);
 
         //画蛇头
         if (fx == "R") {
@@ -98,6 +103,7 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
         foodx = 25 + 25 * rand.nextInt(34);
         foody = 75 + 25 * rand.nextInt(24);
         fx = "R";
+        score = 0;
     }
 
     @Override
@@ -165,6 +171,7 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
             //如果头部碰到食物，则长度+1，重新生成食物位置
             if (snakex[0] == foodx && snakey[0] == foody) {
                 len++;
+                score += 10;
                 foodx = 25 + 25 * rand.nextInt(34);
                 foody = 75 + 25 * rand.nextInt(24);
             }
