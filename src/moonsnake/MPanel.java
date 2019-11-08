@@ -45,6 +45,7 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
         this.setFocusable(true);//可以获取焦点
         this.addKeyListener(this);//键盘监听
         timer.start();
+
     }
 
     public void paintComponent(Graphics g) {
@@ -124,6 +125,7 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
                 isFailed = false;
             } else {
                 isStart = !isStart;
+
             }
 
             repaint();
@@ -211,6 +213,9 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
                 score += 10;
                 foodx = 25 + 25 * rand.nextInt(34);
                 foody = 75 + 25 * rand.nextInt(24);
+                if (score > 20) {//当分数大于20，加快速度
+                    timer.setDelay(50);
+                }
             }
 
             //判断蛇头和蛇身是否碰撞，若碰撞则游戏失败
