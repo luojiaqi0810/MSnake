@@ -31,6 +31,8 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
     String fx = "R";
 
     boolean isStart = false;//开始与否状态
+    boolean isFailed = false;//是否失败
+
     Timer timer = new Timer(100, this);
     int foodx;
     int foody;
@@ -118,7 +120,7 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (isStart) {
+        if (isStart && !isFailed) {
             for (int i = len - 1; i > 0; i--) {
                 snakex[i] = snakex[i - 1];
                 snakey[i] = snakey[i - 1];
@@ -145,12 +147,19 @@ public class MPanel extends JPanel implements KeyListener, ActionListener {
                 }
             }
 
+            //如果头部碰到食物，则长度+1，重新生成食物位置
             if (snakex[0] == foodx && snakey[0] == foody) {
                 len++;
                 foodx = 25 + 25 * rand.nextInt(34);
                 foody = 75 + 25 * rand.nextInt(24);
             }
 
+            //判断蛇头和蛇身是否碰撞，若碰撞则游戏失败
+            for (int i = 1; i < len; i++) {
+                if (snakex[i] == snakex[0] && snakey[i] == snakey[0]) {
+                    isFailed = true;
+                }
+            }
 
             repaint();
         }
